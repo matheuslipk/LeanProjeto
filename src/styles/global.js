@@ -15,9 +15,17 @@ export default createGlobalStyle`
 
   body {
     background-image: url(${imagemBg});
+
     background-size: 100% auto;
     background-position: center;
     background-repeat: no-repeat;
+
+
+    @media(max-width: 500px) {
+      background-size: 100% 100%;
+      background-position-y: 0px;
+      background-position-x: 0px;
+    }
   }
 
   button{

@@ -24,6 +24,7 @@ module.exports = {
     "react/jsx-filename-extension":"off",
     "linebreak-style":"off",
     "jsx-a11y/label-has-associated-control":"off",
-    "import/prefer-default-export":"off"
+    "import/prefer-default-export":"off",
+    "no-restricted-syntax":"off"
   },
 };
