@@ -6,51 +6,74 @@ export const Form = styled.form`
   flex-direction: column;
 
   h1{
-    align-self: center;
-    margin: 0px 10px;
+    margin-bottom:25px;
+    font-weight: normal;
+    color: #888;
+    font-size: 24px;
   }
 
   div{
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
 
     label{
-      width: 60px;
       color: #999999;
+      font-size: 12px;
+      font-weight: bold;
     }
 
     input {
+      border: none;
       flex: 1;
       padding: 5px 10px;
-      border-radius: 4px;
-      margin-left: 10px;
       margin-top: 5px;
       color: #efeeed;
-      border: 2px solid #dbdbdb;
-      background-color: #ccc;
-
+      border-bottom: 2px solid #dbdbdb;
+      margin-bottom: 20px;
+      
       &:focus{
         color: #555555;
       }
     }
   }
+
+  #submit{
+    flex-direction: row;
+    justify-content: space-between; 
+    align-items: flex-end;
+
+    a{
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      text-decoration: none;
+      font-size: 12px;
+      color: #999;
+      padding-right: 10px;
+      /* border: solid 1px; */
+
+      svg{
+        /* border: 1px solid; */
+      }
+    }
+  }
+
 `;
 
 export const SubmitButton = styled.button.attrs({
   type: 'submit',
 })`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  flex: 1;  
+  border: none;
   color: #ffffff;
   background-color: #40c8f4;
-  border: 0;
-  border-radius: 4px;
+  border-radius: 50px;
   margin-top: 10px;
-  padding: 5px 0;
-  font-size: 20px;
+  padding: 8px 20px;
+  font-size: 12px; 
 
   &:hover{
     opacity: 70%;

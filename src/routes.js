@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Formulario from './pages/Formulario';
-import Lista from './pages/Lista';
+import Formulario from './pages/Formulario/formulario';
+import Lista from './pages/Lista/lista';
 
-export default function Routes(){
+export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
@@ -12,5 +12,5 @@ export default function Routes(){
         <Route path="/lista" component={Lista} />
       </Switch>
     </BrowserRouter>
-  )
+  );
 }

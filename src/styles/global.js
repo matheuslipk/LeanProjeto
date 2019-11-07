@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import imagemBg from '../assets/bg.jpg';
+import { tamanhos } from '../constants';
 
 export default createGlobalStyle`
   *{
@@ -7,28 +7,29 @@ export default createGlobalStyle`
     padding: 0;
     outline: 0;
     box-sizing: border-box;
+
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   html, body, #root{
     min-height: 100%;
   }
 
-  body {
-    background-image: url(${imagemBg});
-
-    background-size: 100% auto;
-    background-position: center;
-    background-repeat: no-repeat;
-
-
-    @media(max-width: 500px) {
-      background-size: 100% 100%;
-      background-position-y: 0px;
-      background-position-x: 0px;
-    }
+  #root{
+    display: flex;
   }
 
   button{
     cursor: pointer;
   }
+
+
+  #container{
+    @media (max-width: ${tamanhos.pequeno}){
+      &{
+        width: 100%;
+      }
+    }
+  }
+
 `;
