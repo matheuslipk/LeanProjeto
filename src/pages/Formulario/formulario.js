@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { FaSave, FaArrowRight } from 'react-icons/fa';
 import { IoIosArrowRoundForward } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import Input from 'react-input-mask';
@@ -75,18 +74,18 @@ export default function Formulario() {
     e.preventDefault();
 
     if (!isPhoneValido()) {
-      // return alert('Telefone inválido');
+      return alert('Telefone inválido');
     }
     if (!isCpfValido()) {
-      // return alert('Cpf inválido');
+      return alert('Cpf inválido');
     }
 
     if (cpfExist()) {
-      // return alert('Cpf existente');
+      return alert('Cpf existente');
     }
 
     if (emailExist()) {
-      // return alert('Email já cadastrado');
+      return alert('Email já cadastrado');
     }
 
     const listaUsuarios = JSON.parse(localStorage.getItem('usuarios'));
@@ -127,7 +126,7 @@ export default function Formulario() {
             <input
               value={email}
               onChange={handleEmailChange}
-              type="email"
+              // type="email"
               required
             />
           </div>
@@ -159,7 +158,7 @@ export default function Formulario() {
               Cadastrar
             </SubmitButton>
 
-            <Link to="/lista">
+            <Link to="/login">
               Login
               <IoIosArrowRoundForward color="#999" size={25} />
             </Link>

@@ -11,5 +11,4 @@ export default styled.div.attrs({
   padding: 35px 25px;
   transition: all 0.5s;
   z-index: 10;
-  border: 1px solid;
 `;
