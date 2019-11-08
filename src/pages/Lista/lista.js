@@ -1,7 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import { Link } from 'react-router-dom';
-import { Container, List } from './style';
+import { useHistory } from 'react-router-dom';
+import {
+  Container, List, ButtonPag, Bg,
+} from './style';
+
+function ButtomNext(props) {
+  const { page, disabled } = props;
+
+  const history = useHistory();
+
+  function handleClick() {
+    history.push(`/lista/${page}`);
+  }
+
+  return (
+    <ButtonPag onClick={handleClick} disabled={disabled}>
+      <IoIosArrowForward size={30} />
+    </ButtonPag>
+  );
+}
+
+function ButtomBack(props) {
+  const { page, disabled } = props;
+
+  const history = useHistory();
+
+  function handleClick() {
+    history.push(`/lista/${page}`);
+  }
+
+  return (
+    <ButtonPag onClick={handleClick} disabled={disabled}>
+      <IoIosArrowBack size={30} />
+    </ButtonPag>
+  );
+}
 
 export default function Lista({ match }) {
   const [lista, setLista] = useState([]);
@@ -64,7 +98,7 @@ export default function Lista({ match }) {
   }, [lista, perPage]);
 
   return (
-    <>
+    <Bg>
       <Container>
         <h1>Usuários cadastrados</h1>
         <div>
@@ -100,30 +134,16 @@ export default function Lista({ match }) {
         </List>
 
         <div id="divPagination">
-          {
-            page > 1
-            && (
-              <Link to={`/lista/${page - 1}`}>
-                <button type="button">
-                  <IoIosArrowBack size={30} id="pagePrevios" />
-                </button>
-              </Link>
-            )
-          }
-          {
-            page < (lista.length / perPage) && (
-              <Link to={`/lista/${page + 1}`}>
-                <button type="button">
-                  <IoIosArrowForward size={30} id="pageNext" />
-                </button>
-              </Link>
-            )
-          }
-
-
+          <ButtomBack page={page - 1} disabled={page < 2} />
+          <label>
+            Página
+            {' '}
+            {page}
+          </label>
+          <ButtomNext page={page + 1} disabled={page >= (lista.length / perPage)} />
         </div>
 
       </Container>
-    </>
+    </Bg>
   );
 }
