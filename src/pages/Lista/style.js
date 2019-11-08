@@ -23,7 +23,7 @@ export const Container = styled.div`
 
   #divPagination{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     /* border: solid 1px; */
     margin-top: 20px;
 
@@ -32,6 +32,7 @@ export const Container = styled.div`
       border: none;
       border-radius: 4px;
       opacity: 70%;
+      margin: 0 10px;
 
       &:hover{
         opacity: 100%;

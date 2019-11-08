@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-
+import { Link } from 'react-router-dom';
 import { Container, List } from './style';
 
-export default function Lista({ location }) {
+export default function Lista({ match }) {
   const [lista, setLista] = useState([]);
   const [listVisible, setListVisible] = useState([]);
   const [page, setPage] = useState(1);
@@ -20,7 +20,8 @@ export default function Lista({ location }) {
   }
 
   function handleChangePerPage(e) {
-    setPerPage(e.target.value);
+    setPerPage(Number.parseInt(e.target.value, 10));
+    localStorage.setItem('perPage', e.target.value);
   }
 
   useEffect(() => {
@@ -33,14 +34,11 @@ export default function Lista({ location }) {
       exibir = [...exibir, allUser[i]];
     }
 
-    // console.log('Exibir', exibir);
-
     setListVisible(exibir);
   }, [page, perPage, lista]);
 
   useEffect(() => {
-    const query = new URLSearchParams(location.search);
-    const pageQuery = Number.parseInt(query.get('page'), 10);
+    const pageQuery = Number.parseInt(match.params.page, 10);
 
     if (Number.isInteger(pageQuery)) {
       if (pageQuery < 1) {
@@ -52,11 +50,18 @@ export default function Lista({ location }) {
       setPage(1);
     }
     setLista(JSON.parse(localStorage.getItem('usuarios')));
-  }, [location.search]);
+  }, [match.params.page]);
 
   useEffect(() => {
+    const perPageStorage = localStorage.getItem('perPage');
+    if (perPageStorage) {
+      setPerPage(Number.parseInt(perPageStorage, 10));
+      const select = document.getElementById('selectPerPage');
+      select.value = perPage;
+    }
+
     localStorage.setItem('usuarios', JSON.stringify(lista));
-  }, [lista]);
+  }, [lista, perPage]);
 
   return (
     <>
@@ -64,7 +69,7 @@ export default function Lista({ location }) {
         <h1>Usuários cadastrados</h1>
         <div>
           <label>Quantidade por pagina</label>
-          <select onChange={handleChangePerPage}>
+          <select onChange={handleChangePerPage} id="selectPerPage">
             <option value={2}>2</option>
             <option value={3}>3</option>
             <option value={4}>4</option>
@@ -95,13 +100,26 @@ export default function Lista({ location }) {
         </List>
 
         <div id="divPagination">
-          <button type="button">
-            <IoIosArrowBack size={30} id="pagePrevios" />
-          </button>
+          {
+            page > 1
+            && (
+              <Link to={`/lista/${page - 1}`}>
+                <button type="button">
+                  <IoIosArrowBack size={30} id="pagePrevios" />
+                </button>
+              </Link>
+            )
+          }
+          {
+            page < (lista.length / perPage) && (
+              <Link to={`/lista/${page + 1}`}>
+                <button type="button">
+                  <IoIosArrowForward size={30} id="pageNext" />
+                </button>
+              </Link>
+            )
+          }
 
-          <button type="button">
-            <IoIosArrowForward size={30} id="pageNext" />
-          </button>
 
         </div>
 
