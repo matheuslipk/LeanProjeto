@@ -86,14 +86,26 @@ export const List = styled.ul`
 
     button{
       display: flex;
-      background-color: #f00;
+      background-color: #f008;
       border: none;
       padding: 3px;
       border-radius: 3px;
-      opacity: 50%;
+
+      svg{
+        color: #fff;
+      }
 
       &:hover{
+        background-color: #f00;
+      }
+
+      &[disabled]{
         opacity: 100%;
+        background-color:#eee;
+        cursor: auto;
+        svg{
+          color: #999;
+        }
       }
 
     }
@@ -110,14 +122,13 @@ export const List = styled.ul`
 export const ButtonPag = styled.button.attrs({
   type: 'button',
 })`
-    background-color:#40c8f4;
+    background-color:#40c8f4cc;
     border: none;
     border-radius: 4px;
-    opacity: 70%;
     margin: 0 10px;
 
     &:hover{
-      opacity: 100%;
+      background-color:#40c8f4;
     }
 
     svg{
@@ -125,7 +136,7 @@ export const ButtonPag = styled.button.attrs({
     }  
 
     &[disabled]{
-      opacity: 30%;
+      background-color:#40c8f455;
       cursor: not-allowed;
     }
 `;
@@ -135,4 +146,45 @@ export const Bg = styled.div`
   height: 100vh;
   background: -webkit-linear-gradient(to top, #40c8f4, #2179b5);
   background: linear-gradient(to top, #40c8f4, #2179b5);
+`;
+
+export const Modal = styled.div`
+
+    display: ${(props) => (props.visible ? 'flex' : 'none')};
+    position: absolute;
+    background-color: #000a;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+    min-width: 400px;
+    div{
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+
+      div{
+        display: flex;
+        flex-direction: row;
+        button{
+          flex: 1;
+          margin: 0 10px;
+          border: none;
+          border-radius: 4px;
+          padding: 5px;
+          color: #fff;
+          background-color: #f008;
+
+          &+button{
+            background-color: #40c8f4;
+          }
+        }
+
+      }
+    }
+
 `;

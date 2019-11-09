@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import {
+  IoIosArrowBack, IoIosArrowForward, IoMdTrash, IoMdMore,
+} from 'react-icons/io';
 import { useHistory } from 'react-router-dom';
 import {
-  Container, List, ButtonPag, Bg,
+  Container, List, ButtonPag, Bg, Modal,
 } from './style';
 
 function ButtomNext(props) {
@@ -42,16 +44,28 @@ export default function Lista({ match }) {
   const [listVisible, setListVisible] = useState([]);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(2);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [emailAtual, setEmailAtual] = useState('');
+
   const quantPagina = lista.length / perPage;
 
-  function handleDelete(email) {
+  function handleEdit(email) {
+    alert(`Editar: ${email}`);
+  }
+
+  function handleDelete() {
     let l = [];
     for (const u of lista) {
-      if (u.email !== email) {
+      if (u.email !== emailAtual) {
         l = [...l, u];
       }
     }
     setLista([...l]);
+  }
+
+  function handleOpenModal(email) {
+    setModalVisible(true);
+    setEmailAtual(email);
   }
 
   function handleChangePerPage(e) {
@@ -100,6 +114,16 @@ export default function Lista({ match }) {
 
   return (
     <Bg>
+      <Modal visible={modalVisible} onClick={() => setModalVisible(false)}>
+        <div>
+          <h3>Tem certeza que deseja continuar?</h3>
+          <div>
+            <button type="button" onClick={handleDelete}>Sim</button>
+            <button type="button">Não</button>
+          </div>
+
+        </div>
+      </Modal>
       <Container>
         <h1>Lean lista</h1>
         <div>
@@ -115,20 +139,24 @@ export default function Lista({ match }) {
 
         <List>
           <li>
-            <span><strong>#CPF</strong></span>
+            <span><strong>#Email</strong></span>
+            <span><strong>CPF</strong></span>
             <span><strong>Nome</strong></span>
-            <span><strong>Email</strong></span>
             <span><strong>Telefone</strong></span>
+            <button type="button" disabled>
+              <IoMdMore size={20} />
+            </button>
           </li>
           {
             listVisible.map((usuario) => (
-              <li key={usuario.email} onClickCapture={() => handleDelete(usuario.email)}>
-                <span>{usuario.cpf}</span>
-                <span>{usuario.name}</span>
-                <span>{usuario.email}</span>
-                <span>
-                  {usuario.phone}
-                </span>
+              <li key={usuario.email}>
+                <span onClickCapture={() => handleEdit(usuario.email)}>{usuario.email}</span>
+                <span onClickCapture={() => handleEdit(usuario.email)}>{usuario.name}</span>
+                <span onClickCapture={() => handleEdit(usuario.email)}>{usuario.cpf}</span>
+                <span onClickCapture={() => handleEdit(usuario.email)}>{usuario.phone}</span>
+                <button type="button" onClick={() => handleOpenModal(usuario.email)}>
+                  <IoMdTrash size={20} />
+                </button>
               </li>
             ))
           }
