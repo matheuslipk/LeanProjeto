@@ -28,17 +28,6 @@ export default function Formulario() {
     return (cpf.length === 14);
   }
 
-  function cpfExist() {
-    const listaUsuarios = JSON.parse(localStorage.getItem('usuarios'));
-
-    if (!listaUsuarios) return false;
-
-    for (const u of listaUsuarios) {
-      if (u.cpf === cpf) return true;
-    }
-    return false;
-  }
-
   function emailExist() {
     const listaUsuarios = JSON.parse(localStorage.getItem('usuarios'));
 
@@ -50,26 +39,6 @@ export default function Formulario() {
     return false;
   }
 
-  function handleNameChange(e) {
-    const { value } = e.target;
-    setName(value);
-  }
-
-  function handlePhoneChange(e) {
-    const { value } = e.target;
-    setPhone(value);
-  }
-
-  function handleCpfChange(e) {
-    const { value } = e.target;
-    setCpf(value);
-  }
-
-  function handleEmailChange(e) {
-    const { value } = e.target;
-    setEmail(value);
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -78,10 +47,6 @@ export default function Formulario() {
     }
     if (!isCpfValido()) {
       return alert('Cpf inválido');
-    }
-
-    if (cpfExist()) {
-      return alert('Cpf existente');
     }
 
     if (emailExist()) {
@@ -115,7 +80,7 @@ export default function Formulario() {
             <label>Nome Completo</label>
             <input
               value={name}
-              onChange={handleNameChange}
+              onChange={((e) => setName(e.target.value))}
               required
               minLength={3}
             />
@@ -125,7 +90,7 @@ export default function Formulario() {
             <label>E-mail</label>
             <input
               value={email}
-              onChange={handleEmailChange}
+              onChange={((e) => setEmail(e.target.value))}
               // type="email"
               required
             />
@@ -137,7 +102,7 @@ export default function Formulario() {
               maskChar={null}
               mask="999.999.999-99"
               value={cpf}
-              onChange={handleCpfChange}
+              onChange={((e) => setCpf(e.target.value))}
               required
             />
           </div>
@@ -148,7 +113,7 @@ export default function Formulario() {
               maskChar={null}
               mask="(99) 99999-9999"
               value={phone}
-              onChange={handlePhoneChange}
+              onChange={((e) => setPhone(e.target.value))}
               required
             />
           </div>

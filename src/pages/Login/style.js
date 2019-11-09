@@ -23,6 +23,10 @@ export const Form = styled.form`
       font-weight: bold;
     }
 
+    #labelError{
+      color: red;
+    }
+
     input {
       border: none;
       flex: 1;
@@ -30,7 +34,7 @@ export const Form = styled.form`
       margin-top: 5px;
       color: #efeeed;
       border-bottom: 2px solid #dbdbdb;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       
       &:focus{
         color: #555555;
@@ -48,7 +52,7 @@ export const Form = styled.form`
       flex: 1;
       flex-direction: row;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: center;
       text-decoration: none;
       font-size: 12px;
       color: #999;
@@ -82,4 +86,11 @@ export const SubmitButton = styled.button.attrs({
   svg{
     margin-left: 10px;
   }
+`;
+
+
+export const LabelError = styled.label`
+
+  display: ${(props) => (props.oculto ? 'none' : 'block')}
+
 `;

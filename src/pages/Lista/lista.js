@@ -42,11 +42,12 @@ export default function Lista({ match }) {
   const [listVisible, setListVisible] = useState([]);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(2);
+  const quantPagina = lista.length / perPage;
 
-  function handleDelete(cpf) {
+  function handleDelete(email) {
     let l = [];
     for (const u of lista) {
-      if (u.cpf !== cpf) {
+      if (u.email !== email) {
         l = [...l, u];
       }
     }
@@ -100,9 +101,9 @@ export default function Lista({ match }) {
   return (
     <Bg>
       <Container>
-        <h1>Usuários cadastrados</h1>
+        <h1>Lean lista</h1>
         <div>
-          <label>Quantidade por pagina</label>
+          <label>Quantidade por página</label>
           <select onChange={handleChangePerPage} id="selectPerPage">
             <option value={2}>2</option>
             <option value={3}>3</option>
@@ -114,14 +115,14 @@ export default function Lista({ match }) {
 
         <List>
           <li>
-            <span>#CPF</span>
-            <span>Nome</span>
-            <span>Email</span>
-            <span>Telefone</span>
+            <span><strong>#CPF</strong></span>
+            <span><strong>Nome</strong></span>
+            <span><strong>Email</strong></span>
+            <span><strong>Telefone</strong></span>
           </li>
           {
             listVisible.map((usuario) => (
-              <li key={usuario.cpf} onClickCapture={() => handleDelete(usuario.cpf)}>
+              <li key={usuario.email} onClickCapture={() => handleDelete(usuario.email)}>
                 <span>{usuario.cpf}</span>
                 <span>{usuario.name}</span>
                 <span>{usuario.email}</span>
@@ -136,9 +137,7 @@ export default function Lista({ match }) {
         <div id="divPagination">
           <ButtomBack page={page - 1} disabled={page < 2} />
           <label>
-            Página
-            {' '}
-            {page}
+            {`Página ${page} de ${Math.ceil(quantPagina)}`}
           </label>
           <ButtomNext page={page + 1} disabled={page >= (lista.length / perPage)} />
         </div>
