@@ -19,8 +19,9 @@ export const Overlay = styled.div`
 export default styled.div`
   flex: 1;
   background-image: url(${img});
-  background-size: 100% 100%;
+  background-size: cover;
   background-repeat: no-repeat;
+  overflow: hidden;
   
 
   @media(max-width: ${tamanhos.medio}){

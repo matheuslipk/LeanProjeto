@@ -125,14 +125,12 @@ export default function Lista({ match }) {
         </div>
       </Modal>
       <Container>
-        <div>
-          <Link to="/login">
-            <IoIosArrowRoundBack size={30} />
-            {' '}
+        <Link to="/login">
+          <IoIosArrowRoundBack size={30} />
+          {' '}
             Voltar
-          </Link>
-          <h1>Lean lista</h1>
-        </div>
+        </Link>
+        <h1>Lean lista</h1>
 
         <div className="animation">
           <label>Quantidade por página</label>

@@ -83,3 +83,41 @@ export const SubmitButton = styled.button.attrs({
     margin-left: 10px;
   }
 `;
+
+export const Modal = styled.div`
+
+    display: ${(props) => (props.visible ? 'flex' : 'none')};
+    position: absolute;
+    background-color: #000a;
+    width: 100vw;
+    height: 100vh;
+    z-index: 20;
+    justify-content: center;
+    align-items: center;
+    color: #777;
+    min-width: 400px;
+    div{
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      margin: 0 2%;
+
+      p{
+        margin: 10px 0;
+        color: #999;
+      
+      }
+
+      button{
+        background-color: #40c8f4;
+        color: #fff;
+        padding: 5px 0;
+        border: none;
+        border-radius: 4px;
+        margin-top: 10px;
+      }
+    }
+
+`;

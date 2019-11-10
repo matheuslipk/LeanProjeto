@@ -12,20 +12,24 @@ export const Container = styled.div`
   background-color: #eee;
   border: 1px solid;
   min-height: 500px;
+
+  a{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #40c8f4;
+    align-self: flex-start;
+    font-weight: bold;
+    }
+
   div{
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 20px 0;
 
-    a{
-      text-decoration: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #40c8f4;
-      /* border: 1px solid; */
-    }
+    
 
     label{
       color: #999;
@@ -66,7 +70,6 @@ export const Container = styled.div`
 
   h1{
     text-align: center;
-    margin-top: 20px;
     color: #999;
     flex: 1;
   }

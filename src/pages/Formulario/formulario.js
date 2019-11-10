@@ -5,13 +5,14 @@ import Input from 'react-input-mask';
 import Bg, { Overlay } from '../../components/BG/bg';
 
 import Container from '../../components/Container/container';
-import { Form, SubmitButton } from './style';
+import { Form, SubmitButton, Modal } from './style';
 
 export default function Formulario() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [cpf, setCpf] = useState('');
   const [email, setEmail] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
   function limparCampos() {
     setName('');
@@ -66,7 +67,7 @@ export default function Formulario() {
       name, phone, email, cpf,
     };
     registerNewUser(newUser);
-
+    setModalVisible(true);
     return limparCampos();
   }
 
@@ -75,6 +76,13 @@ export default function Formulario() {
       <Bg>
         <Overlay />
       </Bg>
+
+      <Modal visible={modalVisible}>
+        <div>
+          <h2>Usuário cadastrado com sucesso</h2>
+          <button type="button" onClick={() => setModalVisible(false)}>Voltar</button>
+        </div>
+      </Modal>
 
       <Container>
         <Form onSubmit={handleSubmit}>
