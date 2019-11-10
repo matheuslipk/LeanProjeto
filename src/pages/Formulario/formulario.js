@@ -39,6 +39,15 @@ export default function Formulario() {
     return false;
   }
 
+  function registerNewUser(newUser) {
+    const listaUsuarios = JSON.parse(localStorage.getItem('usuarios'));
+    if (listaUsuarios) {
+      localStorage.setItem('usuarios', JSON.stringify([...listaUsuarios, newUser]));
+    } else {
+      localStorage.setItem('usuarios', JSON.stringify([newUser]));
+    }
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -53,16 +62,10 @@ export default function Formulario() {
       return alert('Email já cadastrado');
     }
 
-    const listaUsuarios = JSON.parse(localStorage.getItem('usuarios'));
     const newUser = {
       name, phone, email, cpf,
     };
-
-    if (listaUsuarios) {
-      localStorage.setItem('usuarios', JSON.stringify([...listaUsuarios, newUser]));
-    } else {
-      localStorage.setItem('usuarios', JSON.stringify([newUser]));
-    }
+    registerNewUser(newUser);
 
     return limparCampos();
   }
@@ -91,7 +94,7 @@ export default function Formulario() {
             <input
               value={email}
               onChange={((e) => setEmail(e.target.value))}
-              // type="email"
+              type="email"
               required
             />
           </div>
@@ -131,10 +134,6 @@ export default function Formulario() {
           </div>
 
         </Form>
-
-        <Link to="/lista">
-        Lista de usuários
-        </Link>
 
       </Container>
     </>

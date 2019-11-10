@@ -10,17 +10,50 @@ export const Container = styled.div`
   min-width: 400px;
   padding: 5px;
   background-color: #eee;
-  min-height: 80%;
-
+  border: 1px solid;
+  min-height: 500px;
   div{
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 20px 0;
+
+    a{
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #40c8f4;
+      /* border: 1px solid; */
+    }
+
     label{
       color: #999;
     }
   }
+
+
+  @keyframes TransformAnimation {
+    from{
+      transform: scale(1);
+    }
+
+    to{
+      transform: scale(1.2);
+    }
+  }
+
+  .animation{
+    animation: TransformAnimation 0.25s alternate;
+    animation-iteration-count: 2;
+  }
+
+  .animation2{
+    animation: TransformAnimation 0.25s alternate;
+    animation-iteration-count: 2;
+    animation-delay: 0.5s;
+  }
+
 
   select{
     padding: 5px;
@@ -35,6 +68,7 @@ export const Container = styled.div`
     text-align: center;
     margin-top: 20px;
     color: #999;
+    flex: 1;
   }
 
   @media(max-width: 800px){
@@ -46,7 +80,6 @@ export const Container = styled.div`
   #divPagination{
     display: flex;
     justify-content: center;
-    /* border: solid 1px; */
     margin-top: 20px;
   }
 `;
@@ -66,7 +99,6 @@ export const List = styled.ul`
       cursor: pointer;
       background-color: #ddd;
     }
-    /* border: 1px solid; */
 
     span{
       flex: 1;
@@ -142,8 +174,9 @@ export const ButtonPag = styled.button.attrs({
 `;
 
 export const Bg = styled.div`
+  min-height: 100vh;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background: -webkit-linear-gradient(to top, #40c8f4, #2179b5);
   background: linear-gradient(to top, #40c8f4, #2179b5);
 `;

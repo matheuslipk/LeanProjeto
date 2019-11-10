@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
-  IoIosArrowBack, IoIosArrowForward, IoMdTrash, IoMdMore,
+  IoIosArrowBack, IoIosArrowForward, IoMdTrash, IoMdMore, IoIosArrowRoundBack,
 } from 'react-icons/io';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import {
   Container, List, ButtonPag, Bg, Modal,
 } from './style';
@@ -125,23 +125,33 @@ export default function Lista({ match }) {
         </div>
       </Modal>
       <Container>
-        <h1>Lean lista</h1>
         <div>
+          <Link to="/login">
+            <IoIosArrowRoundBack size={30} />
+            {' '}
+            Voltar
+          </Link>
+          <h1>Lean lista</h1>
+        </div>
+
+        <div className="animation">
           <label>Quantidade por página</label>
           <select onChange={handleChangePerPage} id="selectPerPage">
             <option value={2}>2</option>
             <option value={3}>3</option>
             <option value={4}>4</option>
             <option value={5}>5</option>
-            <option value={6}>6</option>
+            <option value={10}>10</option>
+            <option value={15}>15</option>
+            <option value={20}>20</option>
           </select>
         </div>
 
         <List>
           <li>
             <span><strong>#Email</strong></span>
-            <span><strong>CPF</strong></span>
             <span><strong>Nome</strong></span>
+            <span><strong>CPF</strong></span>
             <span><strong>Telefone</strong></span>
             <button type="button" disabled>
               <IoMdMore size={20} />
@@ -155,14 +165,14 @@ export default function Lista({ match }) {
                 <span onClickCapture={() => handleEdit(usuario.email)}>{usuario.cpf}</span>
                 <span onClickCapture={() => handleEdit(usuario.email)}>{usuario.phone}</span>
                 <button type="button" onClick={() => handleOpenModal(usuario.email)}>
-                  <IoMdTrash size={20} />
+                  <IoMdTrash size={22} />
                 </button>
               </li>
             ))
           }
         </List>
 
-        <div id="divPagination">
+        <div id="divPagination" className="animation2">
           <ButtomBack page={page - 1} disabled={page < 2} />
           <label>
             {`Página ${page} de ${Math.ceil(quantPagina)}`}
